@@ -1,0 +1,30 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ fundbook.id }}</td>
+      </tr>
+      <tr>
+        <th>项目代码</th>
+        <td>{{ fundbook.project_code }}</td>
+      </tr>
+      <tr>
+        <th>负责人</th>
+        <td>{{ fundbook.principal }}</td>
+      </tr>
+      <tr>
+        <th>经费总额</th>
+        <td>{{ fundbook.total_amount }}</td>
+      </tr>
+
+    </table>
+    <a href='/fundbook/{{fundbook.id}}/edit' class="btn btn-primary">修改</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#fundbook-nav').addClass('active');
+{% endblock %}

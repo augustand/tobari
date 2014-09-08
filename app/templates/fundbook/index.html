@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/fundbook/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='project_code'>项目代码</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='principal'>负责人</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='total_amount'>经费总额</button>
+          </th>
+		  <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fundbook in fundbooks %}
+        <tr>
+          <td><a href="/fundbook/{{fundbook.id}}">{{ fundbook.id }}</a></td>
+          <td>{{ fundbook.project_code }}</td>
+          <td>{{ fundbook.principal }}</td>
+          <td>{{ fundbook.total_amount }}</td>
+          <td><a href="/fundbook/{{fundbook.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#fundbook-nav').addClass('active');
+{% endblock %}

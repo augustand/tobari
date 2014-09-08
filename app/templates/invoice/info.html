@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ invoice.id }}</td>
+      </tr>
+      <tr>
+        <th>科目</th>
+        <td>{{ invoice.subject.name }}</td>
+      </tr>
+      <tr>
+        <th>照片</th>
+        <td><img id="img" src="{{ invoice.image.url() }}"></td>
+      </tr>
+      <tr>
+        <th>账单号</th>
+        <td>{{ invoice.account_id }}</td>
+      </tr>
+      <tr>
+        <th>发票票面日期</th>
+        <td>{{ invoice.invoice_date }}</td>
+      </tr>
+      <tr>
+        <th>发票汇总内容</th>
+        <td>{{ invoice.description }}</td>
+      </tr>
+      <tr>
+        <th>发票内容明细</th>
+        <td>{{ invoice.detail }}</td>
+      </tr>
+      <tr>
+        <th>是否为未消费的票</th>
+        <td>{{ invoice.is_consumed }}</td>
+      </tr>
+    </table>
+    <a href='/invoice/{{invoice.id}}/edit' class="btn btn-primary">修改</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#invoice-nav').addClass('active');
+{% endblock %}

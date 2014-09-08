@@ -1,0 +1,49 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ approval.id }}</td>
+      </tr>
+      <tr>
+        <th>照片</th>
+        <td><img id="img" src="{{ approval.image.url() }}"></td>
+      </tr>
+      <tr>
+        <th>经办人ID</th>
+        <td>{{ info_list[0] }}</td>
+      </tr>
+      <tr>
+        <th>经费条目ID</th>
+        <td>{{ approval.fund_id }}</td>
+      </tr>
+      <tr>
+        <th>发票张数</th>
+        <td>{{ approval.invoice_count }}</td>
+      </tr>
+      <tr>
+        <th>收款人ID</th>
+        <td>{{ info_list[1] }}</td>
+      </tr>
+      <tr>
+        <th>科目单</th>
+        <td>{{ approval.subject_list }}</td>
+      </tr>
+      <tr>
+        <th>审批单类型</th>
+        <td>{{ approval.get_chinese_approval() }}</td>
+      </tr>
+      <tr>
+        <th>上报状态</th>
+        <td>{{ approval.get_chinese_status() }}</td>
+      </tr>
+    </table>
+    <a href='/approval/{{approval.id}}/edit' class="btn btn-primary">修改</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#approval-nav').addClass('active');
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/invoice/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <div class="input-group pull-right">
+        <input name="search" type="text" class='form-control' value='{{search}}'>
+        <span class="input-group-btn">
+          <button class='btn btn-default'><i class='glyphicon glyphicon-search'></i></button>
+        </span>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='subject_id'>科目</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='picture_id'>照片ID号</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='amount'>发票金额</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='account_id'>账单号</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='invoice_date'>发票票面日期</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='is_consumed'>是否为未消费的票</button>
+          </th>
+          <th>发票汇总内容</th>
+          <th>发票内容明细</th>
+            <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for invoice in invoices %} 
+        <tr>
+          <td><a href="/invoice/{{invoice.id}}/0">{{ invoice.id }}</a></td>
+          <td>{{ invoice.subject.name }}</td>
+          <td>{{ invoice.picture_id }}</td>
+          <td>{{ invoice.amount }}</td>
+          <td>{{ invoice.account_id }}</td>
+          <td>{{ invoice.invoice_date }}</td>
+          <td>{{ invoice.is_consumed }}</td>
+          <td>{{ invoice.description }}</td>
+          <td>{{ invoice.detail }}</td>
+          <td><a href="/invoice/{{invoice.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#invoice-nav').addClass('active');
+{% endblock %}

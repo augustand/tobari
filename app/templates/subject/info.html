@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ subject.id }}</td>
+      </tr>
+      <tr>
+        <th>科目名</th>
+        <td>{{ subject.name }}</td>
+      </tr>
+      <tr>
+        <th>描述</th>
+        <td>{{ subject.description }}</td>
+      </tr>
+    </table>
+    <a href='/subject/{{subject.id}}/edit' class="btn btn-primary">修改</a>
+    <a href='/subject/new' class="btn btn-primary">继续添加</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#subject-nav').addClass('active');
+{% endblock %}

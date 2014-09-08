@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/account/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='bill_id'>账单编号</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='funder_id'>出资人</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='transaction_money'>交易金额</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='currency'>币种</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='china_yuan'>实际人民币</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='enter_money'>入账金额</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='enter_date'>记账日</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='card_no'>卡号后四位</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='trade_abstract'>交易摘要</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='transaction_place'>交易地点</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='is_submit'>是否需要报销</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='status_index'>发票抵冲记录</button>
+          </th>
+          <th>
+          	修改
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+		{% for account in accounts %} 
+
+        <tr>
+          <td><a href="/account/{{account.id}}">{{ account.id }}</a></td>
+          <td>{{ account.bill_id }}</td>
+          <td>{{ account.funders.name }}</td>
+          <td>{{ account.transaction_money }}</td>
+          <td>{{ account.get_chinese() }}</td>
+          <td>{{ account.china_yuan }}</td>
+          <td>{{ account.enter_money }}</td>
+          <td>{{ account.enter_date }}</td>
+          <td>{{ account.card_no }}</td>
+          <td>{{ account.trade_abstract }}</td>
+          <td>{{ account.transaction_place }}</td>
+          <td>{{ account.is_submit }}</td>
+          <td>{{ account.status_index }}</td>
+          {% if account.bill_id == None %}
+          <td><a href="/account/{{account.id}}/edit">修改</a></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#account-nav').addClass('active');
+{% endblock %}

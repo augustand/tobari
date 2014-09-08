@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/fund/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='fundbook_id'>经费本ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='income'>收入</button>
+          </th>
+            <th>
+            <button name="rank" class='btn btn-link' value='expend'>支出</button>
+          </th>
+
+           <th>
+            <button name="rank" class='btn btn-link' value='abtract'>摘要</button>
+          </th>
+		  <th>修改</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for fund in funds %}
+        <tr>
+          <td><a href="/fund/{{fund.id}}">{{ fund.id }}</a></td>
+          <td>{{ fund.fundbook_id }}</td>
+          <td>{{ fund.income }}</td>
+          <td>{{ fund.expend }}</td>
+          <td>{{ fund.abtract }}</td>
+
+          <td><a href="/fund/{{fund.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#fund-nav').addClass('active');
+{% endblock %}

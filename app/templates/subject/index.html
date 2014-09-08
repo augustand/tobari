@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/subject/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='name'>科目名</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='description'>科目描述</button>
+          </th>
+          <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subject in subjects %}
+        <tr>
+          <td>{{ subject.id }}</td>
+          <td><a href="/subject/{{subject.id}}">{{ subject.name }}</a></td>
+          <td>{{ subject.description }}</td>
+          <td><a href="/subject/{{subject.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#subject-nav').addClass('active');
+{% endblock %}

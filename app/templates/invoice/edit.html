@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "_form.html" import render_field %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <form method="post" role="form" class="form-horizontal" enctype='multipart/form-data'>
+      {{ form.csrf_token }}
+      {{ render_field(form.subject_id) }}
+      {{ render_field(form.picture) }}
+      {{ render_field(form.amount) }}
+      {{ render_field(form.invoice_date) }}
+      {{ render_field(form.is_consumed) }}
+      {{ render_field(form.description) }}
+      {{ render_field(form.detail) }}
+      <!-- 此处尚未完成，请自行填充 -->
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">保存</button>
+     <!--  <a href='/picture/upload' class="btn btn-primary">上传</a>  -->  
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#invoice-nav').addClass('active');
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ person.id }}</td>
+      </tr>
+      <tr>
+        <th>姓名</th>
+        <td>{{ person.name }}</td>
+      </tr>
+      <tr>
+        <th>用户电话</th>
+        <td>{{ person.telephone }}</td>
+      </tr>
+      <tr>
+        <th>手机号</th>
+        <td>{{ person.mobile }}</td>
+      </tr>
+      <tr>
+        <th>办公室</th>
+        <td>{{ person.office }}</td>
+      </tr>
+      <tr>
+        <th>工号</th>
+        <td>{{ person.job_number }}</td>
+      </tr>
+      <tr>
+        <th>身份证号</th>
+        <td>{{ person.identity_card }}</td>
+      </tr>
+      <tr>
+        <th>公务信用卡ID</th>
+        <td>{{ person.business_card_id }}</td>
+      </tr>
+      <tr>
+        <th>信记卡ID</th>
+        <td>{{ person.debit_card_id }}</td>
+      </tr>
+      <tr>
+        <th>计税身份</th>
+        <td>{{ person.get_chinese() }}</td>
+      </tr>
+    </table>
+    <a href='/person/{{person.id}}/edit' class="btn btn-primary">修改</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#person-nav').addClass('active');
+{% endblock %}

@@ -1,0 +1,80 @@
+<html>
+<head>
+  {% if title %}
+  <title>{{title}} - 报账系统</title> {% else %}
+  <title>报账系统</title> {% endif %}
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+  <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+  <script src="/static/js/moment-with-langs.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script>moment.lang('zh-cn');</script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/index">报账系统</a>
+    </div>
+    <div class="collapse navbar-collapse"
+         id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li id="person-nav"><a href="/person">个人</a></li>
+        <li id="invoice-nav"><a href="/invoice">发票</a></li>
+        <li id="bill-nav"><a href="/bill">账单</a></li>
+        <li id="account-nav"><a href="/account">账单条目</a></li>
+        <li id="approval-nav"><a href="/approval">审批单</a></li>
+        <li id="fundbook-nav"><a href="/fundbook">经费本</a></li>
+        <li id="fund-nav"><a href="/fund">经费条目</a></li>
+        <li id="subject-nav"><a href="/subject">科目表</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if g.user %}
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <span><img src="{{ g.user.avatar() }}"></span>
+            <span>{{ g.user.username }}</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/user/info">用户</a></li>
+            <li><a href="/user/setting">设置</a></li>
+            <li class="divider"></li>
+            <li><a href="/user/logout">退出</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="/user/login">登录</a></li>
+        <li><a href="/user/register">注册</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  {% if category == 'error' %}
+  <div class="alert alert-danger" role="alert">{{ message }}</div>
+  {% elif category == 'warning' %}
+  <div class="alert alert-warning" role="alert">{{ message }}</div>
+  {% elif category == 'success' %}
+  <div class="alert alert-success" role="alert">{{ message }}</div>
+  {% else %}
+  <div class="alert alert-info" role="alert">{{ message }}</div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  <footer></footer>
+  <pre>{{session}}</pre>
+</div>
+<script>
+{% block js %}
+{% endblock %}
+</script>
+</body>
+</html>

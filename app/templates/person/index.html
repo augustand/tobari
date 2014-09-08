@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/person/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+
+      <div class="input-group pull-right">
+        <input name="search" type="text" class='form-control' value='{{search}}'>
+        <span class="input-group-btn">
+          <button class='btn btn-default'><i class='glyphicon glyphicon-search'></i></button>
+        </span>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='name'>姓名</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='job_number'>工号</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='office'>办公室</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='telephone'>用户电话</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='mobile'>手机号</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='job_number'>身份证号</button>
+          </th>
+          <th>开户行</th>
+          <th>公务信用卡ID</th>
+          <th>信记卡ID</th>
+          <th>税类型</th>
+          <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+        <tr>
+          <td>{{ person.id }}</td>
+          <td><a href="/person/{{person.id}}">{{ person.name }}</a></td>
+          <td>{{ person.job_number }}</td>
+          <td>{{ person.office }}</td>
+          <td>{{ person.telephone }}</td>
+          <td>{{ person.mobile }}</td>
+          <td>{{ person.identity_card }}</td>
+          <td>{{ person.opening_bank }}</td>
+          <td>{{ person.business_card_id }}</td>
+          <td>{{ person.debit_card_id }}</td>
+          <td>{{ person.get_chinese() }}</td>
+          <td><a href="/person/{{person.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#person-nav').addClass('active');
+{% endblock %}

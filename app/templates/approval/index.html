@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form class="form-search form-inline" role="form">
+      <a href='/approval/new' class="btn btn-primary">添加</a>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            <button name="rank" class='btn btn-link' value='id'>ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='picture_id'>审批单照片ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='agent_id'>经办人ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='fund_id'>经费本ID</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='invoice_count'>发票张数</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='payee_id'>收款人</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='approval_type'>审批单类型</button>
+          </th>
+          <th>
+            <button name="rank" class='btn btn-link' value='status'>上报状态</button>
+          </th>
+          <th>科目列表</th>
+          <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for approval in approvals %}
+        <tr>
+          <td><a href="/approval/{{approval.id}}">{{ approval.id }}</a></td>
+          <td>{{ approval.picture_id }}</td>
+          <td>{{ approval.agent_id }}</td>
+          <td>{{ approval.fund_id }}</td>
+          <td>{{ approval.invoice_count }}</td>
+          <td>{{ approval.payee_id }}</td>
+          <td>{{ approval.get_chinese_approval() }}</td>
+          <td>{{ approval.get_chinese_status() }}</td>
+          <td>{{ approval.subject_list }}</td>
+          <td><a href="/approval/{{approval.id}}/edit">修改</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#approval-nav').addClass('active');
+{% endblock %}

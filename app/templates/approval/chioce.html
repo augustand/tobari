@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+<!-- 模板如果不理解，可以直接照抄 -->
+{% block content %}
+<div class="row">
+  <div class="center-block">
+    <form method="post" class="form-search form-inline" role="form">
+    	<table>
+    	<tr><td>已组合的发票总金额： {{invoices[1]}}</td></tr>
+    	</table>
+      <input name="order" type="hidden" value="{{ order=='asc' and 'desc' or 'asc' }}">
+      <h4 class="text-info">温馨提示：点选单选框即可选择关联账单条目</h4>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th></th>
+          <th>
+            ID
+          </th>
+          <th>
+            科目
+          </th>
+          <th>
+            照片
+          </th>
+          <th>
+            发票金额
+          </th>
+          <th>
+            账单号
+          </th>
+          <th>
+            发票票面日期
+          </th>
+          <th>
+            发票汇总内容
+          </th>
+          <th>
+            发票内容明细
+          </th>
+          <th>
+            是否为未消费的票
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for invoice in invoices %} 
+        <tr>
+          <td><input type="checkbox" name="radiobutton" value={{invoice.id}}></td>
+          <td><a href="/invoice/{{invoice.id}}">{{ invoice.id }}</a></td>
+          <td>{{ invoice.subject_id }}</td>
+          <td>{{ invoice.amount }}</td>
+          <td>{{ invoice.account_id }}</td>
+          <td>{{ invoice.invoice_date() }}</td>
+          <td>{{ invoice.description }}</td>
+          <td>{{ invoice.detail }}</td>
+          <td>{{ invoice.is_consumed }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+	  {{ pagination.links|safe }}
+	  <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">确定</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#approval-nav').addClass('active');
+{% endblock %}

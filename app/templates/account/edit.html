@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "_form.html" import render_field %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <form method="post" role="form" class="form-horizontal" enctype='multipart/form-data'>
+      {{ form.csrf_token }}
+      {{ render_field(form.funder) }}
+      {{ render_field(form.transaction_money) }}
+      {{ render_field(form.currency) }}
+      {{ render_field(form.enter_money) }}
+      {{ render_field(form.enter_date) }}
+      {{ render_field(form.card_no) }}
+      {{ render_field(form.trade_abstract) }}
+      {{ render_field(form.transaction_place) }}
+      {{ render_field(form.is_submit) }}
+      <!-- 此处尚未完成，请自行填充 -->
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">保存</button>
+     <!--  <a href='/picture/upload' class="btn btn-primary">上传</a>  -->  
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#account-nav').addClass('active');
+{% endblock %}

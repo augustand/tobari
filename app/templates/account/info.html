@@ -1,0 +1,65 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ account.id }}</td>
+      </tr>
+      <tr>
+        <th>导入账单的编号</th>
+        <td>{{ account.bill_id }}</td>
+      </tr>
+      <tr>
+        <th>出资人</th>
+        <td>{{ account.funders.name }}</td>
+      </tr>
+      <tr>
+        <th>交易金额</th>
+        <td>{{ account.transaction_money }}</td>
+      </tr>
+      <tr>
+        <th>币种</th>
+        <td>{{ account.get_chinese()}}</td>
+      </tr>
+      <tr>
+        <th>实际人民币</th>
+        <td>{{ account.china_yuan }}</td>
+      </tr>
+      <tr>
+        <th>入账金额</th>
+        <td>{{ account.enter_money }}</td>
+      </tr>
+      <tr>
+        <th>记账日</th>
+        <td>{{ account.enter_date }}</td>
+      </tr>
+      <tr>
+        <th>卡号后四位</th>
+        <td>{{ account.card_no }}</td>
+      </tr>
+      <tr>
+        <th>交易摘要</th>
+        <td>{{ account.trade_abstract }}</td>
+      </tr>
+      <tr>
+        <th>交易地点</th>
+        <td>{{ account.transaction_place }}</td>
+      </tr>
+      <tr>
+        <th>是否需要报销</th>
+        <td>{{ account.is_submit }}</td>
+      </tr>
+      <tr>
+        <th>发票抵冲账单的记录</th>
+        <td>{{ account.status_index }}</td>
+      </tr>
+    </table>
+    <a href='/account/{{account.id}}/edit' class="btn btn-primary">修改</a>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+$('#account-nav').addClass('active');
+{% endblock %}
